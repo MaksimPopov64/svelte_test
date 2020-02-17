@@ -3,24 +3,37 @@
 	let src = `https://sun9-69.userapi.com/c858028/v858028497/2453f/4WQrwD0FDFA.jpg?ava=1`;
 	let htmlString = `<em>Hui</em>`
 	let inputValue;
+	let counter = 0;
 	function handleChange() {
-		name = 'changed';
+		name = 'Changed';
+	} 
+	
+	$: counterClass = counter % 2 === 0 ? 'red' : 'blue';
+	$: upperName = name.toUpperCase();
+	$: lowerName = name.toLowerCase();
+
+	$: {
+		console.log(`${name}`);
 	}
 
-	function submit(event) {		
-		console.log(inputValue);
+	$: {
+		if (counter % 10 === 0) {
+			counterClass = 'green';
+		}
 	}
+
 </script>
 
 <main>
-	<h1>Hello {name.toUpperCase()}!</h1>	
+	<h1>Hell {upperName}</h1>	
+	<h1>ggg {name}</h1>
+	<h2>yyy {lowerName}</h2>
 	<img {src} alt=""/>
 	<p>{@html htmlString}</p>
-	<button on:click={handleChange}>Change</button>
-	<form on:submit|preventDefault|once={submit}>
-	<input type="text" on:input={event => (inputValue = event.target.value)}/>
-	<button type="submit">Submit</button>
-	</form>
+	<button on:click={handleChange}>Change</button>	
+	<h1 class={counterClass}>{counter}</h1>
+	<button on:click={() => counter++}>Add</button>
+	<input type="text" bind:value={name}/>
 </main>
 
 <style>
@@ -45,6 +58,18 @@
 	img {
 		width: 100px;
 		border: 1px dotted green;
+	}
+
+	.red  {
+		color: red;
+	}
+
+	.blue {
+		color: blue;
+	}
+
+	.green {
+		color: green;
 	}
 
 	@media (min-width: 640px) {
