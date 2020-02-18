@@ -6,6 +6,7 @@
   let inputValue;
   let counter = 0;
   let value = "Hello";
+  const doodles = [1,2,3,4,5,4];
   function handleChange() {
     name = "Changed";
   }
@@ -93,4 +94,7 @@
     <p>Большеват</p>
   {/if}
   <Component age={19} />
+  {#each doodles as doodl, i (doodl)}
+   <section>{doodl}</section>
+  {/each}
 </main>
